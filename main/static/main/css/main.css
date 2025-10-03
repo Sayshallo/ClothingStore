@@ -1,0 +1,178 @@
+.block {
+    height: 100vh;
+    padding: 100px 20px; /* отступ сверху и снизу вместо "вписанности" в окно */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: white;
+
+    align-items: center;
+    font-size: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.block:first-child { opacity: 1; }
+
+.active_block {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.block .content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.cta-button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: white;
+    color: #333;
+}
+
+
+.hero-content {
+    background-color: #c7c7c799;
+    padding: 4vh;
+    border-radius: 4vh;
+    box-shadow: 0px 0px 10px;
+    transition: 0.3s;
+}
+
+.hero-content:hover {
+    padding: 0;
+    cursor: pointer;
+    outline: 100vw solid #00000099;;
+    transition: 1s;
+}
+
+.hero-content h1{
+    position: absolute;
+    opacity: 0;
+    transition: 0.3s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-content:hover h1{
+    opacity: 1;
+    transition: 0.8s;
+}
+
+.hero-content:hover h2{
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.hero-content:hover h3{
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.hero-content:hover h4{
+    opacity: 0;
+    transition: 0.2s;
+}
+
+/* About Section */
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    color: #333;
+}
+
+.about-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.about-map,
+.about-info {
+    flex: 1;
+    min-height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.about-map {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.about-info {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.about-info p {
+    margin-bottom: 10px;
+}
+
+.about-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.about-links a:hover {
+    text-decoration: underline;
+}
+
+.social-links {
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.social-links img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .block {
+        min-height: 300px; /* Уменьшенная высота для мобильных устройств */
+    }
+
+    .block h2 {
+        font-size: 24px;
+    }
+
+    .block p {
+        font-size: 16px;
+    }
+}

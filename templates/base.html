@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Denny Rose{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+    {% block css %}
+
+    {% endblock %}
+
+
+</head>
+<body data-is-authenticated="{{ is_authenticated|yesno:'true,false' }}">
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}">Fashion Forge</a>
+        </div>
+        <nav>
+            <ul>
+                {% if categories %}
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'category_detail' category.name %}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="icons">
+            {% if user %}
+                <a href="{% url 'favorites' %}" class="heart-icon">
+                    <img src="{% static 'base/img/heart.png' %}" alt="Wishlist">
+                </a>
+            {% else %}
+                <a class="cart-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Вы не авторизованы">
+                    <img src="{% static 'base/img/heart.png' %}" alt="Wishlist">
+                </a>
+            {% endif %}
+
+            {% if user %}
+            <a href="{% url 'cart' %}" class="cart-icon">
+                <img src="{% static 'main/img/cart.png' %}" alt="Cart">
+            </a>
+            {% else %}
+                <a class="cart-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Вы не авторизованы">
+                    <img src="{% static 'main/img/cart.png' %}" alt="Cart">
+                </a>
+            {% endif %}
+
+            {% if user %}
+                <a href="{% url 'lk' %}" class="auth-icon">
+                    <img src="{% static 'base/img/login.png' %}" alt="Auth">
+                </a>
+            {% else %}
+                <a href="{% url 'authorization' %}" class="auth-icon">
+                    <img src="{% static 'base/img/login.png' %}" alt="Auth">
+                </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}
+        <!-- Контент страницы будет здесь -->
+        {% endblock %}
+    </main>
+
+
+    <!-- Блок для уведомлений -->
+    <div id="notification" class="alert alert-warning d-flex align-items-center" role="alert">
+      <div>
+        Вы должны авторизоваться!
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    {% block js %}
+
+    {% endblock %}
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Инициализация Tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+    </script>
+
+</body>
+</html>

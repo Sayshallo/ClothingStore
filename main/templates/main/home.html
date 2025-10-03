@@ -1,0 +1,81 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+    {% endblock %}
+
+{% block title %}Catalog - Denny Rose{% endblock %}
+
+{% block content %}
+
+            <!-- Hero Section -->
+    <section class="block hero" style="background: url('{% static 'main/img/preview.png' %}') no-repeat center center/cover;">
+        <div class="hero-content">
+            <h3>Добро пожаловать</h3>
+            <h4>к нам в</h4>
+            <h2>Fashion Forge</h2>
+            <h1>К товарам!</h1>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="block catalog" style="background: url('{% static 'authorization/img/auth.jpg' %}') no-repeat center center/cover;">
+        <div class="container py-5">
+            <div class="row justify-content-around">
+                <!-- Цикл для вывода категорий -->
+                {% for category in categories %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem; min-width: 200px; max-width: 300px;">
+                            <img src="static/main/img/{{ category.name }}_card.jpg" class="card-img-top" alt="{{ category.name }}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ category.name }}</h5>
+                                <p class="card-text"></p>
+                                <a href="{% url 'category_detail' category.name %}" class="btn btn-outline-success">Перейти к категории</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="block about" style="background: url('{% static 'authorization/img/auth.jpg' %}') no-repeat center center/cover;">
+        <div class="about-container">
+            <!-- Левая часть: Карта -->
+            <div class="about-map">
+                <div id="map" style="width: 100%;">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab40761ddd5741bc3eed120d367fb59370b5caa6e42238aa572bc5568ed44517c&amp;source=constructor" width="500" height="400" frameborder="0"></iframe>
+                </div>
+            </div>
+
+            <!-- Правая часть: Информация о магазине -->
+            <div class="about-info">
+                <h2>О магазине</h2>
+                <p><strong>Название:</strong>Fashion Forge</p>
+                <p><strong>Адрес:</strong> г. Краснодар, ул. Адмирала Чука, д. 75</p>
+                <p><strong>Время работы:</strong> пн-пт 11:00–20:00; сб,вс 12:00–18:00</p>
+                <div class="about-links">
+                    <a href="https://go.2gis.com/co8hl"  target="_blank">2GIS</a> |
+                    <a href="https://yandex.ru/profile/4484647838?lang=ru"  target="_blank">Яндекс.Карты</a>
+                </div>
+
+                <!-- Социальные сети -->
+                <div class="social-links">
+                    <a href="https://wa.me/79621501600"  target="_blank"><img src="{% static 'main/img/wa.png' %}" alt="WhatsApp"></a>
+                    <a href="https://t.me/dennyrose27"  target="_blank"><img src="{% static 'main/img/tg.png' %}" alt="Telegram"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'main/js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

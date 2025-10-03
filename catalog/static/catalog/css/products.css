@@ -1,0 +1,170 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    height: 100vh; /* Устанавливаем полную высоту для body и html */
+    overflow: hidden;
+}
+
+.wrapper {
+    overflow: scroll;
+    height: 85vh;
+    padding: 1%;
+}
+
+/* Стили для контейнера с товарами */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 17vw)); /* Адаптивная сетка */
+    gap: 20px; /* Отступ между карточками */
+    margin: 20px;
+    justify-content: center;
+}
+
+/* Скрываем полосу прокрутки для WebKit браузеров (Chrome, Safari) */
+.product-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Стили для карточки товара */
+.product-card {
+    position: relative;
+    align-content: end;
+    display: grid;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    grid-template-rows: 1fr auto auto;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для изображения товара */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: center;
+    background: #65656594;
+}
+
+/* Стили для блока управления количеством */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Распределяем элементы по ширине */
+    margin-top: 10px;
+}
+
+a:has(> button.btn-product), .btn-product{
+    width: 100%;
+}
+
+a {
+    all: initial;
+    text-align: center;
+}
+
+a:hover {
+    all: initial;
+    text-align: center;
+}
+
+
+/* Стили для контейнера названия */
+.product-title-container {
+    height: 40px; /* Фиксированная высота контейнера */
+    margin-top: auto; /* Размещаем контейнер внизу карточки */
+    position: relative; /* Делаем контейнер родительским для абсолютного позиционирования */
+}
+
+/* Стили для названия товара */
+.product-name {
+    cursor: pointer;
+    white-space: nowrap; /* Запрещаем перенос текста */
+    overflow: hidden; /* Скрываем переполнение */
+    text-overflow: ellipsis; /* Добавляем троеточие */
+    width: 100%; /* Занимаем всю ширину контейнера */
+    transition: all 0.3s ease; /* Анимация для плавного изменения */
+}
+
+/* При наведении на карточку - только для длинных названий */
+.product-card:hover .product-name.long-name {
+    white-space: normal; /* Разрешаем перенос текста */
+    overflow: visible; /* Показываем весь текст */
+    text-overflow: unset; /* Убираем троеточие */
+    position: absolute; /* Размещаем текст поверх изображения */
+    transform: translate(0%, -70%);
+    left: 0; /* Выравниваем по левому краю */
+    box-sizing: border-box; /* Учитываем отступы в размерах */
+    z-index: 20; /* Поднимаем текст еще выше */
+    transition: all 0.3s ease; /* Анимация для плавного изменения */
+    cursor: pointer;
+}
+
+
+.filter-container {
+    position: relative;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #f9f9f97d;
+    transition: 0.3s;
+}
+
+/* Стиль для строки фильтров */
+.filter-row {
+    justify-content: end;
+    display: flex;
+    gap: 20px;
+    transition: 0.3s;
+}
+
+.filter-item {
+    width: 10vw;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Стиль для кнопок аккордеона */
+.accordion-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+/* Стиль для выпадающих списков */
+.accordion-collapse {
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+    padding: 10%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Стиль для кнопки "Применить" */
+.apply-filters {
+    padding: 0.5rem 1rem; /* Уменьшаем отступы */
+    font-size: 0.875rem; /* Уменьшаем размер шрифта */
+}
+
+.accordion-button {
+    border-radius: 10px;
+    background: #000000;
+    transition: 0.3s;
+}
+
+
+

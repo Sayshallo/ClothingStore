@@ -1,0 +1,78 @@
+html, body {
+    height: 100%; /* Устанавливаем высоту для html и body */
+    margin: 0; /* Убираем отступы */
+
+    /* Фон для body */
+    background-image: url('/static/authorization/img/auth.jpg'); /* Путь к изображению */
+    background-repeat: no-repeat; /* Запрет повторения фона */
+    background-size: cover; /* Масштабирование фона под размер экрана */
+    background-position: center; /* Центрирование фона */
+}
+
+
+#notification-container {
+    position: fixed;
+    width: 100vw;
+    z-index: 1000;
+    display: table-column;
+    top: 5vh;
+    z-index: 9999;
+}
+
+/* Добавлено */
+#notification-container::before {
+    content: '';
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+}
+
+.alert {
+    position: relative;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+    top: 0;
+    display: block;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 2vh;
+}
+
+/* Анимация появления */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Анимация исчезновения */
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+/* Keyframes для появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes для исчезновения */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px); /* Перемещаем вверх за экран */
+    }
+}

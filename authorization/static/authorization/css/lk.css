@@ -1,0 +1,314 @@
+body {
+    background: #67B26F;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #000;
+}
+
+.student-profile .card {
+    border-radius: 10px;
+}
+
+.student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+
+.student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.student-profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.img-fluid {
+    border-radius: 15px;
+}
+
+a:has(> button.btn-product), .btn-product{
+    width: 100%;
+}
+
+a {
+    text-align: center;
+    transition: 0.3s;
+    font-weight: lighter;
+}
+
+a:hover {
+    scale: 1.01;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.product-name, .product-price {
+    text-align: center;
+}
+
+.row-cols-1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 -15px;
+}
+
+.col {
+    flex: 0 0 auto;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+
+.order-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px;
+    transition: 1s;
+}
+
+.order-row h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.order-row p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.order-row div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-row:hover {
+    box-shadow: 0px 0px 10px #4de74d;
+    transition: 0.2s;
+    scale: 1.01;
+    cursor: pointer;
+}
+
+.product_url {
+    transition: 1s;
+    padding: 5px;
+}
+
+.product_url:hover {
+    transition: 0.3s;
+    scale: 0.8;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px #4de74d;
+    font-size: 16px;
+}
+
+
+
+
+.review-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.review-card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.review-card .header h5 {
+    transition: 1s;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.review-card .header h5:hover {
+    transition: 0.3s;
+    scale: 0.9;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px #4de74d;
+    font-size: 20px;
+    transform: translateX(-5%);
+}
+
+
+.review-card .header .stars {
+    color: gold;
+    font-size: 18px;
+}
+
+.review-card .description {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+.card-item {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.card-item span {
+    font-size: 16px;
+}
+
+
+
+#newCardForm .form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+}
+#newCardForm .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+
+
+.info-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: #000;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    margin: 10px;
+}
+
+.info-icon::after {
+    content: "Отзыв можно редактировать только на странице товара.";
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #343a40;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 10;
+
+    /* Начальное состояние */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.info-icon:hover::after {
+    /* Показываем подсказку при наведении */
+    opacity: 1;
+    visibility: visible;
+}
+
+
+#notification-container {
+    position: fixed;
+    width: 100vw;
+    z-index: 1000;
+    display: table-column;
+    top: 5vh;
+    z-index: 9999;
+}
+
+/* Добавлено */
+#notification-container::before {
+    content: '';
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+}
+
+.alert {
+    position: relative;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+    top: 0;
+    display: block;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 2vh;
+}
+
+/* Анимация появления */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Анимация исчезновения */
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+/* Keyframes для появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes для исчезновения */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px); /* Перемещаем вверх за экран */
+    }
+}

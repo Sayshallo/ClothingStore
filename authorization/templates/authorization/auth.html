@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'authorization/css/authorization.css' %}">
+{% endblock %}
+
+{% block title %}Вход / Регистрация{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5 bg-light-subtle rounded">
+      <!-- Навигация табов -->
+      <ul class="nav nav-tabs mb-4" id="authTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Вход</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Регистрация</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="authTabContent">
+        <!-- Форма Входа -->
+        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+          <form id="loginForm">
+            <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="Введите email" required />
+            </div>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Введите пароль" required />
+            </div>
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-primary" id="login_enter">Войти</button>
+                <button type="button" class="btn btn-outline-primary" id="forgot_password">Забыли пароль?</button>
+            </div>
+        </form>
+        </div>
+          <!-- Форма Регистрации -->
+        <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+          <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+              <label for="registerName" class="form-label">Имя</label>
+              <input type="text" class="form-control" id="registerName" name="registerName" placeholder="Введите имя" required />
+          </div>
+          <div class="mb-3">
+              <label for="registerEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="example@mail.com" required />
+          </div>
+          <div class="mb-3">
+              <label for="registerPhone" class="form-label">Телефон</label>
+              <input type="tel" class="form-control" id="registerPhone" name="registerPhone" placeholder="+7(___)___-__-__" required maxlength="16" minlength="16" />
+          </div>
+          <div class="mb-3">
+              <label for="registerPassword" class="form-label">Пароль</label>
+              <input type="password" class="form-control" id="registerPassword" name="registerPassword" placeholder="Введите пароль" minlength="8" required />
+          </div>
+          <button type="button" class="mb-3 btn btn-success" id="register_enter">Зарегистрироваться</button>
+      </form>
+        </div>
+          <!-- Модальное окно для ошибки входа -->
+        <div class="modal fade" id="loginErrorModal" tabindex="-1" aria-labelledby="loginErrorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginErrorModalLabel">Ошибка входа</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Неверный email/телефон или пароль.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для ошибки регистрации -->
+        <div class="modal fade" id="registerErrorModal" tabindex="-1" aria-labelledby="registerErrorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerErrorModalLabel">Ошибка регистрации</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Сообщение об ошибке будет подставлено через JavaScript -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!-- Модальное окно для ввода кода -->
+        <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verificationModalLabel">Подтверждение кода</h5>
+                        <!-- Убираем кнопку закрытия -->
+                    </div>
+                    <div class="modal-body">
+                        <p>Введите 4-значный код. Мы его вам прислали на указанную почту.</p>
+                        <input type="text" id="verificationCodeInput" class="form-control" placeholder="Код подтверждения" required maxlength="4" />
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-primary" id="verifyCodeButton">Проверить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Контейнер для уведомлений -->
+<div id="notification-container"></div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'authorization/js/auth.js' %}"></script>
+    <script>
+        const save_url = "{% url 'save_user' %}";
+        const login_url = "{% url 'check_user' %}";
+        code_url = "{% url 'send_code' %}";
+        const lk_url = "{% url 'lk' %}";
+        const register_url = "{% url 'register' %}";
+
+        document.getElementById('registerPhone').onkeydown = function(e){
+            inputphone(e,document.getElementById('registerPhone'))
+        }
+
+        function inputphone(e, phone){
+        function stop(evt) {
+            evt.preventDefault();
+        }
+        let key = e.key, v = phone.value; not = key.replace(/([0-9])/, 1)
+
+        if(not == 1 || 'Backspace' === not){
+        if('Backspace' != not){
+            if(v.length < 3 || v ===''){phone.value= '+7('}
+            if(v.length === 6){phone.value= v +')'}
+            if(v.length === 10){phone.value= v +'-'}
+             if(v.length === 13){phone.value= v +'-'}
+            }
+        }else{stop(e)}  }
+    </script>
+{% endblock %}

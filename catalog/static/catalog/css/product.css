@@ -1,0 +1,276 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    height: 100vh; /* Устанавливаем полную высоту для body и html */
+    overflow: hidden;
+}
+
+.col-md-6 {
+    padding: 5vw;
+}
+
+.card-body, .card, .col-md-6 {
+    transition: 0.5s;
+}
+
+.card {
+    width: 100%;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Распределяем элементы по ширине */
+    margin-top: 10px;
+}
+
+.quantity-control .btn-plus {
+    width: 100%; /* Изначально кнопка "+" занимает всю ширину */
+    transition: transform 0.3s ease, width 0.3s ease; /* Анимация изменения размера и положения */
+}
+
+.quantity-control.initial .btn-minus,
+.quantity-control.initial .count {
+    display: none; /* Скрываем "-" и счетчик в начальном состоянии */
+}
+
+.quantity-control .btn-minus {
+    opacity: 0; /* Начальное состояние минуса - скрыт */
+    transform: scale(0); /* Масштабирование для эффекта "появления" */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Анимация появления */
+}
+
+.quantity-control .count {
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0; /* Начальное состояние счетчика - скрыт */
+    transition: 0.3s ease; /* Анимация появления */
+}
+
+/* Анимация кнопок */
+.btn-plus,
+.btn-minus {
+    z-index: 2;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-minus {
+    z-index: 1;
+    width: 20%;
+    opacity: 0; /* Начальное состояние минуса - скрыт */
+    transform: scale(0); /* Масштабирование для эффекта "появления" */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Стили для выбора цвета и размера */
+.colors, .sizes {
+    margin-bottom: 20px;
+}
+
+.color-option, .size-option {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.color-option input[type="radio"],
+.size-option input[type="radio"] {
+    display: none;
+}
+
+.color-option label,
+.size-option label {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.color-option input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+}
+
+.size-option input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+}
+
+.product-detail, .row, .col-md-6, .product-image {
+    height: 100%;
+}
+
+.main {
+    height: 90vh;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+}
+
+
+.remove-favorite {
+    top: 2%;
+    position: absolute;
+}
+
+.remove-favorite img {
+    width: 10%;
+}
+
+/* Стили для карточки товара */
+.product-detail {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    gap: 20px; /* Отступ между элементами */
+}
+
+.product-image img {
+    box-shadow: 0px 0px 50px;
+    max-width: 100%; /* Изображение масштабируется до ширины родительского контейнера */
+    height: auto; /* Высота автоматически вычисляется */
+    display: block; /* Убираем отступы блоков вокруг изображения */
+}
+
+.product-info {
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+.add-to-cart-btn, .delete-btn {
+    position: absolute;
+    margin-top: 2%;
+    width: 50%;
+    color: white;
+    opacity: 0; /* Начальная прозрачность (невидимая) */
+    visibility: hidden; /* Скрываем кнопку */
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* Плавный переход */
+    justify-content: center;
+    display: flex;
+}
+
+.delete-btn {
+    left: 25%;
+}
+
+.add-to-cart-btn.show, .delete-btn.show {
+    position: relative;
+    opacity: 1; /* Полная видимость */
+    visibility: visible; /* Показываем кнопку */
+}
+
+/* Контейнер для уведомлений */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 40%;
+    z-index: 1000;
+}
+
+/* Базовые стили для уведомлений */
+.alert {
+    position: relative;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Начинаем с нулевой прозрачности */
+    transform: translateY(20px); /* Начинаем ниже экрана */
+    animation-fill-mode: forwards; /* Сохраняем конечное состояние анимации */
+}
+
+/* Анимация появления */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Анимация исчезновения */
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+/* Keyframes для появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes для исчезновения */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px); /* Перемещаем вверх за экран */
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column; /* Вертикальное расположение элементов */
+    }
+
+    .product-image {
+        margin-bottom: 20px; /* Добавляем отступ между изображением и информацией о товаре */
+    }
+
+    body {
+        overflow: scroll;
+    }
+}
+
+.rating-area {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.rating-area:not(:checked) > input {
+    display: none;
+}
+.rating-area:not(:checked) > label {
+    float: right;
+    width: 42px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 32px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+    content: '★';
+}
+.rating-area > input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}

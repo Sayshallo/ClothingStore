@@ -1,0 +1,142 @@
+html, body {
+    height: 100%; /* Устанавливаем высоту для html и body */
+    margin: 0; /* Убираем отступы */
+}
+
+        /* Подкатегории */
+
+        .subcategory-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            height: calc(100vh - 150px);
+            margin-bottom: 1rem;
+        }
+        .subcategory {
+            max-width: 15%;
+            border-radius: 50px;
+            position: relative; /* Родительский контейнер должен быть relative */
+            flex: 1;
+            margin: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 1s;
+        }
+
+        .subcategory img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: 0.3s;
+        }
+        .subcategory-name {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.25rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            user-select: none;
+            text-align: center;
+            padding: 0 0.5rem;
+        }
+
+        .subcategory:hover {
+            background: #8a8b8b87;
+            transition: 0.3s;
+        }
+
+        .subcategory:hover img {
+            top: 40%;
+            transition: 0.3s;
+            filter: brightness(0.5);
+        }
+        .subcategory:hover .subcategory-name {
+            opacity: 1;
+        }
+
+        .link-btn {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .subcategory:hover .link-btn {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            transition: 0.3s;
+        }
+
+        /* Товары в модальном окне */
+    #productsModal .product-list {
+        display: none;
+        flex-wrap: wrap;
+        justify-content: start;
+        padding: 10px;
+    }
+    #productsModal .product-list.active {
+        display: flex;
+    }
+    .product-card {
+        width: 20%;
+        margin: 2%;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: white;
+    }
+    .product-card img {
+        width: 100%;
+        aspect-ratio: 4 / 5; /* высота чуть больше ширины */
+        object-fit: cover;
+        margin-bottom: 10px;
+        border-radius: 0.25rem;
+    }
+
+    .quantity-control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        user-select: none;
+    }
+    .quantity-control .btn {
+        width: 2rem;
+        height: 2rem;
+        font-weight: bold;
+        font-size: 1.25rem;
+        line-height: 1;
+        border-radius: 0.25rem;
+        padding: 0;
+        user-select: none;
+    }
+    .quantity-control .count {
+        min-width: 2rem;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+        user-select: none;
+    }
+    /* Изначально: только кнопка плюса, занимает всю ширину */
+    .quantity-control.initial .btn {
+        width: 100%;
+    }
+    .quantity-control.initial .count {
+        display: none;
+    }
