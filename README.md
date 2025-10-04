@@ -8,3 +8,13 @@ For user convenience, the store provides a shopping cart feature, where users ca
 The store's staff uses a special administrative panel to manage the website's content, adding new products, updating information, and ensuring the catalog's relevance.
 
 The system is built on modern technologies, ensuring fast performance.
+
+# Database
+The database file is located in the root of the directory.
+
+To migrate, you will need to:
+1. Configure the database connection
+2. Run the command "python manage.py makemigrations <app_name>"
+3. Run the command "python manage.py migrate"
+
+To check, use the command "python manage.py showmigrations"
